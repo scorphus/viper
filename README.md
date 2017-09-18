@@ -191,7 +191,7 @@ _When working with ENV variables, it’s important to recognize that Viper
 treats ENV variables as case sensitive._
 
 Viper provides a mechanism to try to ensure that ENV variables are unique. By
-using `SetEnvPrefix`, you can tell Viper to use add a prefix while reading from
+using `SetEnvPrefix`, you can tell Viper to use a prefix while reading from
 the environment variables. Both `BindEnv` and `AutomaticEnv` will use this
 prefix.
 
@@ -209,7 +209,7 @@ the `BindEnv` is called.
 `AutomaticEnv` is a powerful helper especially when combined with
 `SetEnvPrefix`. When called, Viper will check for an environment variable any
 time a `viper.Get` request is made. It will apply the following rules. It will
-check for a environment variable with a name matching the key uppercased and
+check for an environment variable with a name matching the key uppercased and
 prefixed with the `EnvPrefix` if set.
 
 `SetEnvReplacer` allows you to use a `strings.Replacer` object to rewrite Env
