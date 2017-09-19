@@ -172,7 +172,7 @@ Aliases permit a single value to be referenced by multiple keys
 viper.RegisterAlias("loud", "Verbose")
 
 viper.Set("verbose", true) // same result as next line
-viper.Set("loud", true)   // same result as prior line
+viper.Set("loud", true)    // same result as prior line
 
 viper.GetBool("loud") // true
 viper.GetBool("verbose") // true
@@ -354,7 +354,7 @@ disk, flags, or environment variables.
 Viper uses [crypt](https://github.com/xordataexchange/crypt) to retrieve
 configuration from the K/V store, which means that you can store your
 configuration values encrypted and have them automatically decrypted if you have
-the correct gpg keyring.  Encryption is optional.
+the correct gpg keyring. Encryption is optional.
 
 You can use remote configuration in conjunction with local configuration, or
 independently of it.
@@ -388,7 +388,7 @@ err := viper.ReadRemoteConfig()
 
 ```go
 viper.AddSecureRemoteProvider("etcd","http://127.0.0.1:4001","/config/hugo.json","/etc/secrets/mykeyring.gpg")
-viper.SetConfigType("json") // because there is no file extension in a stream of bytes,  supported extensions are "json", "toml", "yaml", "yml", "properties", "props", "prop"
+viper.SetConfigType("json") // because there is no file extension in a stream of bytes, supported extensions are "json", "toml", "yaml", "yml", "properties", "props", "prop"
 err := viper.ReadRemoteConfig()
 ```
 
