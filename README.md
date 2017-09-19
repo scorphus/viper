@@ -18,9 +18,9 @@ Many Go projects are built using Viper including:
 
 ## What is Viper?
 
-Viper is a complete configuration solution for Go applications including 12-Factor apps. It is designed
-to work within an application, and can handle all types of configuration needs
-and formats. It supports:
+Viper is a complete configuration solution for Go applications including
+12-Factor apps. It is designed to work within an application, and can handle all
+types of configuration needs and formats. It supports:
 
 * setting defaults
 * reading from JSON, TOML, YAML, HCL, and Java properties config files
@@ -42,7 +42,8 @@ Viper is here to help with that.
 
 Viper does the following for you:
 
-1. Find, load, and unmarshal a configuration file in JSON, TOML, YAML, HCL, or Java properties formats.
+1. Find, load, and unmarshal a configuration file in JSON, TOML, YAML, HCL, or
+   Java properties formats.
 2. Provide a mechanism to set default values for your different
    configuration options.
 3. Provide a mechanism to set override values for options specified through
@@ -83,14 +84,14 @@ viper.SetDefault("Taxonomies", map[string]string{"tag": "tags", "category": "cat
 ### Reading Config Files
 
 Viper requires minimal configuration so it knows where to look for config files.
-Viper supports JSON, TOML, YAML, HCL, and Java Properties files. Viper can search multiple paths, but
-currently a single Viper instance only supports a single configuration file.
-Viper does not default to any configuration search paths leaving defaults decision
-to an application.
+Viper supports JSON, TOML, YAML, HCL, and Java Properties files. Viper can
+search multiple paths, but currently a single Viper instance only supports a
+single configuration file. Viper does not default to any configuration search
+paths leaving defaults decision to an application.
 
-Here is an example of how to use Viper to search for and read a configuration file.
-None of the specific paths are required, but at least one path should be provided
-where a configuration file is expected.
+Here is an example of how to use Viper to search for and read a configuration
+file. None of the specific paths are required, but at least one path should be
+provided where a configuration file is expected.
 
 ```go
 viper.SetConfigName("config") // name of config file (without extension)
@@ -105,14 +106,15 @@ if err != nil { // Handle errors reading the config file
 
 ### Watching and re-reading config files
 
-Viper supports the ability to have your application live read a config file while running.
+Viper supports the ability to have your application live read a config file
+while running.
 
 Gone are the days of needing to restart a server to have a config take effect,
 viper powered applications can read an update to a config file while running and
 not miss a beat.
 
-Simply tell the viper instance to watchConfig.
-Optionally you can provide a function for Viper to run each time a change occurs.
+Simply tell the viper instance to watchConfig. Optionally you can provide a
+function for Viper to run each time a change occurs.
 
 **Make sure you add all of the configPaths prior to calling `WatchConfig()`**
 
@@ -187,20 +189,19 @@ with ENV:
  * `SetEnvPrefix(string)`
  * `SetEnvReplacer(string...) *strings.Replacer`
 
-_When working with ENV variables, it’s important to recognize that Viper
-treats ENV variables as case sensitive._
+_When working with ENV variables, it’s important to recognize that Viper treats
+ENV variables as case sensitive._
 
 Viper provides a mechanism to try to ensure that ENV variables are unique. By
-using `SetEnvPrefix`, you can tell Viper to use a prefix while reading from
-the environment variables. Both `BindEnv` and `AutomaticEnv` will use this
-prefix.
+using `SetEnvPrefix`, you can tell Viper to use a prefix while reading from the
+environment variables. Both `BindEnv` and `AutomaticEnv` will use this prefix.
 
 `BindEnv` takes one or two parameters. The first parameter is the key name, the
 second is the name of the environment variable. The name of the environment
-variable is case sensitive. If the ENV variable name is not provided, then
-Viper will automatically assume that the key name matches the ENV variable name,
-but the ENV variable is IN ALL CAPS. When you explicitly provide the ENV
-variable name, it **does not** automatically add the prefix.
+variable is case sensitive. If the ENV variable name is not provided, then Viper
+will automatically assume that the key name matches the ENV variable name, but
+the ENV variable is IN ALL CAPS. When you explicitly provide the ENV variable
+name, it **does not** automatically add the prefix.
 
 One important thing to recognize when working with ENV variables is that the
 value will be read each time it is accessed. Viper does not fix the value when
@@ -230,8 +231,8 @@ id := Get("id") // 13
 
 ### Working with Flags
 
-Viper has the ability to bind to flags. Specifically, Viper supports `Pflags`
-as used in the [Cobra](https://github.com/spf13/cobra) library.
+Viper has the ability to bind to flags. Specifically, Viper supports `Pflags` as
+used in the [Cobra](https://github.com/spf13/cobra) library.
 
 Like `BindEnv`, the value is not set when the binding method is called, but when
 it is accessed. This means you can bind as early as you want, even in an
@@ -262,8 +263,8 @@ i := viper.GetInt("flagname") // retrieve values from viper instead of pflag
 The use of [pflag](https://github.com/spf13/pflag/) in Viper does not preclude
 the use of other packages that use the [flag](https://golang.org/pkg/flag/)
 package from the standard library. The pflag package can handle the flags
-defined for the flag package by importing these flags. This is accomplished
-by a calling a convenience function provided by the pflag package called
+defined for the flag package by importing these flags. This is accomplished by a
+calling a convenience function provided by the pflag package called
 AddGoFlagSet().
 
 Example:
@@ -293,9 +294,11 @@ func main() {
 
 #### Flag interfaces
 
-Viper provides two Go interfaces to bind other flag systems if you don’t use `Pflags`.
+Viper provides two Go interfaces to bind other flag systems if you don’t use
+`Pflags`.
 
-`FlagValue` represents a single flag. This is a very simple example on how to implement this interface:
+`FlagValue` represents a single flag. This is a very simple example on how to
+implement this interface:
 
 ```go
 type myFlag struct {}
@@ -311,7 +314,8 @@ Once your flag implements this interface, you can simply tell Viper to bind it:
 viper.BindFlagValue("my-flag-name", myFlag{})
 ```
 
-`FlagValueSet` represents a group of flags. This is a very simple example on how to implement this interface:
+`FlagValueSet` represents a group of flags. This is a very simple example on how
+to implement this interface:
 
 ```go
 type myFlagSet struct {
@@ -325,7 +329,8 @@ func (f myFlagSet) VisitAll(fn func(FlagValue)) {
 }
 ```
 
-Once your flag set implements this interface, you can simply tell Viper to bind it:
+Once your flag set implements this interface, you can simply tell Viper to bind
+it:
 
 ```go
 fSet := myFlagSet{
@@ -341,10 +346,10 @@ package:
 
 `import _ "github.com/spf13/viper/remote"`
 
-Viper will read a config string (as JSON, TOML, YAML or HCL) retrieved from a path
-in a Key/Value store such as etcd or Consul.  These values take precedence over
-default values, but are overridden by configuration values retrieved from disk,
-flags, or environment variables.
+Viper will read a config string (as JSON, TOML, YAML or HCL) retrieved from a
+path in a Key/Value store such as etcd or Consul. These values take precedence
+over default values, but are overridden by configuration values retrieved from
+disk, flags, or environment variables.
 
 Viper uses [crypt](https://github.com/xordataexchange/crypt) to retrieve
 configuration from the K/V store, which means that you can store your
@@ -423,8 +428,8 @@ go func(){
 
 ## Getting Values From Viper
 
-In Viper, there are a few ways to get a value depending on the value’s type.
-The following functions and methods exist:
+In Viper, there are a few ways to get a value depending on the value’s type. The
+following functions and methods exist:
 
  * `Get(key string) : interface{}`
  * `GetBool(key string) : bool`
@@ -480,15 +485,16 @@ Viper can access a nested field by passing a `.` delimited path of keys:
 GetString("datastore.metric.host") // (returns "127.0.0.1")
 ```
 
-This obeys the precedence rules established above; the search for the path
-will cascade through the remaining configuration registries until found.
+This obeys the precedence rules established above; the search for the path will
+cascade through the remaining configuration registries until found.
 
 For example, given this configuration file, both `datastore.metric.host` and
-`datastore.metric.port` are already defined (and may be overridden). If in addition
-`datastore.metric.protocol` was defined in the defaults, Viper would also find it.
+`datastore.metric.port` are already defined (and may be overridden). If in
+addition `datastore.metric.protocol` was defined in the defaults, Viper would
+also find it.
 
-However, if `datastore.metric` was overridden (by a flag, an environment variable,
-the `Set()` method, …) with an immediate value, then all sub-keys of
+However, if `datastore.metric` was overridden (by a flag, an environment
+variable, the `Set()` method, …) with an immediate value, then all sub-keys of
 `datastore.metric` become undefined, they are “shadowed” by the higher-priority
 configuration level.
 
@@ -552,8 +558,8 @@ Suppose we have:
 func NewCache(cfg *Viper) *Cache {...}
 ```
 
-which creates a cache based on config information formatted as `subv`.
-Now it’s easy to create these 2 caches separately as:
+which creates a cache based on config information formatted as `subv`. Now it’s
+easy to create these 2 caches separately as:
 
 ```go
 cfg1 := viper.Sub("app.cache1")
@@ -565,8 +571,8 @@ cache2 := NewCache(cfg2)
 
 ### Unmarshaling
 
-You also have the option of Unmarshaling all or a specific value to a struct, map,
-etc.
+You also have the option of Unmarshaling all or a specific value to a struct,
+map, etc.
 
 There are two methods to do this:
 
@@ -593,8 +599,8 @@ if err != nil {
 ## Viper or Vipers?
 
 Viper comes ready to use out of the box. There is no configuration or
-initialization needed to begin using Viper. Since most applications will want
-to use a single central repository for their configuration, the viper package
+initialization needed to begin using Viper. Since most applications will want to
+use a single central repository for their configuration, the viper package
 provides this. It is similar to a singleton.
 
 In all of the examples above, they demonstrate using viper in its singleton
@@ -633,11 +639,13 @@ which formats your application will permit.
 
 Q: Why is it called “Viper”?
 
-A: Viper is designed to be a [companion](http://en.wikipedia.org/wiki/Viper_(G.I._Joe))
-to [Cobra](https://github.com/spf13/cobra). While both can operate completely
+A: Viper is designed to be a
+[companion](http://en.wikipedia.org/wiki/Viper_(G.I._Joe)) to
+[Cobra](https://github.com/spf13/cobra). While both can operate completely
 independently, together they make a powerful pair to handle much of your
 application foundation needs.
 
 Q: Why is it called “Cobra”?
 
-A: Is there a better name for a [commander](http://en.wikipedia.org/wiki/Cobra_Commander)?
+A: Is there a better name for a
+[commander](http://en.wikipedia.org/wiki/Cobra_Commander)?
