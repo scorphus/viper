@@ -523,7 +523,7 @@ Extract sub-tree from Viper.
 
 For example, `viper` represents:
 
-```json
+```yaml
 app:
   cache1:
     max-items: 100
@@ -541,7 +541,7 @@ subv := viper.Sub("app.cache1")
 
 `subv` represents:
 
-```json
+```yaml
 max-items: 100
 item-size: 64
 ```
